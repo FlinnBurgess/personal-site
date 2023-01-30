@@ -6,53 +6,82 @@ import SectionContainer from './SectionContainer'
 import Footer from './Footer'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
+import styles from './LayoutWrapper.module.scss'
 
 interface Props {
   children: ReactNode
 }
 
 const LayoutWrapper = ({ children }: Props) => {
+  const headerRef = useRef(null)
+  const [stickyOffset, setStickyOffset] = useState<number>()
+  const [headerIsSticky, setHeaderIsSticky] = useState(false)
+
+  useEffect(
+    function setHeaderHeightToOffset() {
+      setStickyOffset(headerRef.current.offsetTop)
+    },
+    [headerRef.current.offsetTop]
+  )
+
+  useEffect(function registerScrollListener() {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > stickyOffset && !headerIsSticky) {
+        setHeaderIsSticky(true)
+      } else if (window.scrollY <= stickyOffset) {
+        setHeaderIsSticky(false)
+      }
+    })
+  })
+
   return (
-    <SectionContainer>
-      <div className="flex h-screen flex-col justify-between">
-        <header className="flex items-center justify-between py-10">
-          <div>
-            <Link href="/" aria-label={siteMetadata.headerTitle}>
-              <div className="flex items-center justify-between">
-                <div className="mr-3">
-                  <Logo />
-                </div>
-                {typeof siteMetadata.headerTitle === 'string' ? (
-                  <div className="hidden h-6 text-2xl font-semibold sm:block">
-                    {siteMetadata.headerTitle}
-                  </div>
-                ) : (
-                  siteMetadata.headerTitle
-                )}
+    <>
+      <header className={`${styles.navbar} ${headerIsSticky ? styles.sticky : ''}`} ref={headerRef}>
+        <div>
+          <Link href="/" aria-label={siteMetadata.headerTitle}>
+            <div className="flex items-center justify-between">
+              <div className="mr-3">
+                <Logo />
               </div>
-            </Link>
-          </div>
-          <div className="flex items-center text-base leading-5">
-            <div className="hidden sm:block">
-              {headerNavLinks.map((link) => (
-                <Link
-                  key={link.title}
-                  href={link.href}
-                  className="p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4"
-                >
-                  {link.title}
-                </Link>
-              ))}
+              {typeof siteMetadata.headerTitle === 'string' ? (
+                <div className="hidden h-6 text-2xl font-semibold sm:block">
+                  {siteMetadata.headerTitle}
+                </div>
+              ) : (
+                siteMetadata.headerTitle
+              )}
             </div>
-            <ThemeSwitch />
-            <MobileNav />
+          </Link>
+        </div>
+        <div className="flex items-center text-base leading-5">
+          <div className="hidden sm:block">
+            {headerNavLinks.map((link, idx) => (
+              <Link
+                key={link.title}
+                href={link.href}
+                className={`${styles.navItem} ${
+                  styles[`colour${idx}`]
+                } p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 inline-flex gap-0.5 align-middle items-center`}
+              >
+                {link.icon?.('black')}
+                {link.title}
+              </Link>
+            ))}
           </div>
-        </header>
-        <main className="mb-auto">{children}</main>
-        <Footer />
-      </div>
-    </SectionContainer>
+          <ThemeSwitch />
+          <MobileNav />
+        </div>
+      </header>
+      <SectionContainer>
+        <div className="flex h-screen flex-col justify-between">
+          <main className={`${styles.pageContent} ${headerIsSticky ? styles.offsetContent : ''}`}>
+            {children}
+          </main>
+          <Footer />
+        </div>
+      </SectionContainer>
+    </>
   )
 }
 

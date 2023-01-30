@@ -35,6 +35,11 @@ module.exports = {
       colors: {
         primary: colors.teal,
         gray: colors.neutral,
+        theme1: '#e76f51',
+        theme2: '#f4a261',
+        theme3: '#e9c46a',
+        theme4: '#2a9d8f',
+        theme5: '#264653',
       },
       typography: (theme) => ({
         DEFAULT: {

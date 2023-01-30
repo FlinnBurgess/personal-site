@@ -1,0 +1,60 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.5rem 9%;
+  transition: all 1s;
+  z-index: 1;
+  position: fixed;
+  width: 100%;
+
+  &.sticky {
+    padding: 5px 9%;
+    transition: all 0.5s;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px) saturate(160%) contrast(45%) brightness(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(160%) contrast(45%) brightness(140%);
+  }
+}
+
+.navItem {
+  background-size: 100% 3%;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  transition: all 0.1s ease-in-out;
+
+  &:hover {
+    background-size: 100% 100%;
+  }
+}
+
+.pageContent {
+  margin-bottom: auto;
+  padding-top: 160px;
+}
+
+.colour0 {
+  background-image: linear-gradient(#e76f51, #e76f51);
+}
+
+.colour1 {
+  background-image: linear-gradient(#f4a261, #f4a261);
+}
+
+.colour2 {
+  background-image: linear-gradient(#e9c46a, #e9c46a);
+}
+
+.colour3 {
+  background-image: linear-gradient(#2a9d8f, #2a9d8f);
+  &:hover {
+    color: white;
+  }
+}
+
+.colour4 {
+  background-image: linear-gradient(#264653, #264653);
+  &:hover {
+    color: white;
+  }
+}
