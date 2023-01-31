@@ -15,21 +15,14 @@ interface Props {
 
 const LayoutWrapper = ({ children }: Props) => {
   const headerRef = useRef(null)
-  const [stickyOffset, setStickyOffset] = useState<number>()
+  const navbarSquashOffset = 90
   const [headerIsSticky, setHeaderIsSticky] = useState(false)
-
-  useEffect(
-    function setHeaderHeightToOffset() {
-      setStickyOffset(headerRef.current.offsetTop)
-    },
-    [headerRef.current.offsetTop]
-  )
 
   useEffect(function registerScrollListener() {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > stickyOffset && !headerIsSticky) {
+      if (window.scrollY > navbarSquashOffset && !headerIsSticky) {
         setHeaderIsSticky(true)
-      } else if (window.scrollY <= stickyOffset) {
+      } else if (window.scrollY <= navbarSquashOffset) {
         setHeaderIsSticky(false)
       }
     })
