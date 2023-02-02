@@ -8,6 +8,7 @@ import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import { ReactNode, useEffect, useRef, useState } from 'react'
 import styles from './LayoutWrapper.module.scss'
+import { useRouter } from 'next/router'
 
 interface Props {
   children: ReactNode
@@ -17,6 +18,9 @@ const LayoutWrapper = ({ children }: Props) => {
   const headerRef = useRef(null)
   const navbarSquashOffset = 90
   const [headerIsSticky, setHeaderIsSticky] = useState(false)
+
+  const router = useRouter()
+  const currentRoute = router.pathname
 
   useEffect(function registerScrollListener() {
     window.addEventListener('scroll', () => {
@@ -49,18 +53,23 @@ const LayoutWrapper = ({ children }: Props) => {
         </div>
         <div className="flex items-center text-base leading-5">
           <div className="hidden sm:block">
-            {headerNavLinks.map((link, idx) => (
-              <Link
-                key={link.title}
-                href={link.href}
-                className={`${styles.navItem} ${
-                  styles[`colour${idx}`]
-                } p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 inline-flex gap-0.5 align-middle items-center`}
-              >
-                {link.icon?.('black')}
-                {link.title}
-              </Link>
-            ))}
+            {headerNavLinks.map((link, idx) => {
+              const linkIsActive = currentRoute === link.href
+              return (
+                <Link
+                  key={link.title}
+                  href={link.href}
+                  className={`${styles.navItem} ${styles[`colour${idx}`]} ${
+                    linkIsActive ? styles.active : ''
+                  } ${
+                    styles[link.activeTextColour]
+                  } p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 inline-flex gap-0.5 align-middle items-center`}
+                >
+                  {link.icon}
+                  {link.title}
+                </Link>
+              )
+            })}
           </div>
           <ThemeSwitch />
           <MobileNav />

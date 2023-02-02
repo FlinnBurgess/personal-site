@@ -4,24 +4,26 @@ import HammerIcon from '../public/static/images/icons/navbar/hammer.svg'
 import BlogIcon from '../public/static/images/icons/navbar/blog.svg'
 import ManIcon from '../public/static/images/icons/navbar/man.svg'
 
-const iconFunctionFactory = (Icon) =>
-  function returnColouredIcon(color = 'black') {
-    return <Icon color={color} />
-  }
-
 const headerNavLinks = [
   {
     href: '/blog',
     title: 'Blog',
-    icon: iconFunctionFactory(BlogIcon),
+    icon: <BlogIcon color={'black'} />,
+    activeTextColour: 'white',
   },
-  { href: '/tags', title: 'Tags', icon: iconFunctionFactory(TagIcon) },
-  { href: '/projects', title: 'Projects', icon: iconFunctionFactory(HammerIcon) },
-  { href: '/about', title: 'About', icon: iconFunctionFactory(ManIcon) },
+  { href: '/tags', title: 'Tags', icon: <TagIcon color={'black'} />, activeTextColour: 'black' },
+  {
+    href: '/projects',
+    title: 'Projects',
+    icon: <HammerIcon color={'black'} />,
+    activeTextColour: 'black',
+  },
+  { href: '/about', title: 'About', icon: <ManIcon color={'black'} />, activeTextColour: 'white' },
   {
     href: 'https://topaz-feather-00e.notion.site/Digital-Garden-8d6f4a7b9de44896a78bf045c3eb6a66',
     title: 'Digital Garden',
-    icon: iconFunctionFactory(LeafIcon),
+    icon: <LeafIcon color={'black'} />,
+    activeTextColour: 'white',
   },
 ]
 
