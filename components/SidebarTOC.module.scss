@@ -1,0 +1,49 @@
+.sidebarToc {
+  margin-top: 2em;
+  overflow: auto;
+  max-height: 60vh;
+}
+
+.item {
+  a {
+    position: relative;
+
+    &.colour0::after {
+      background-color: #e76f51;
+    }
+
+    &.colour1::after {
+      background-color: #f4a261;
+    }
+
+    &.colour2::after {
+      background-color: #e9c46a;
+    }
+
+    &.colour3::after {
+      background-color: #2a9d8f;
+    }
+
+    &.colour4::after {
+      background-color: #264653;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      margin-top: 22px;
+      left: 0;
+      background-color: #0087ca;
+      transform-origin: bottom right;
+      transition: transform 0.25s ease-out;
+    }
+
+    &.active::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+  }
+}
