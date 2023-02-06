@@ -33,14 +33,14 @@ const SidebarTOC = ({
 
   return (
     <div className={styles.sidebarToc}>
-      <p className={'text-xl font-bold'}>On this page</p>
+      <p className={styles.header}>On this page</p>
       <ul>
         {filteredToc.map((heading, idx) => {
           const colour = idx % 5
           return (
             <li
               key={heading.value}
-              className={`${heading.depth >= indentDepth && 'ml-6'} ${styles.item}`}
+              className={`${heading.depth >= indentDepth && 'ml-3'} ${styles.item}`}
             >
               <a
                 href={heading.url}

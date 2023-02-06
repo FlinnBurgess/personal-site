@@ -2,9 +2,18 @@
   margin-top: 2em;
   overflow: auto;
   max-height: 60vh;
+
+  .header {
+    font-weight: 500;
+    margin-bottom: 12px;
+    font-size: 25px;
+  }
 }
 
 .item {
+  margin-top: 3px;
+  font-size: 15px;
+
   a {
     position: relative;
 
@@ -34,7 +43,8 @@
       width: 100%;
       transform: scaleX(0);
       height: 2px;
-      margin-top: 22px;
+      margin-top: 19px;
+      border-radius: 90px;
       left: 0;
       background-color: #0087ca;
       transform-origin: bottom right;
