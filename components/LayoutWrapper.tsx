@@ -65,7 +65,7 @@ const LayoutWrapper = ({ children }: Props) => {
                     styles[link.activeTextColour]
                   } p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 inline-flex gap-0.5 align-middle items-center`}
                 >
-                  {link.icon}
+                  <link.Icon className={styles.navIcon} />
                   {link.title}
                 </Link>
               )

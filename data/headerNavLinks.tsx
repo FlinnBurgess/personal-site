@@ -8,21 +8,21 @@ const headerNavLinks = [
   {
     href: '/blog',
     title: 'Blog',
-    icon: <BlogIcon color={'black'} />,
+    Icon: BlogIcon,
     activeTextColour: 'white',
   },
-  { href: '/tags', title: 'Tags', icon: <TagIcon color={'black'} />, activeTextColour: 'black' },
+  { href: '/tags', title: 'Tags', Icon: TagIcon, activeTextColour: 'black' },
   {
     href: '/projects',
     title: 'Projects',
-    icon: <HammerIcon color={'black'} />,
+    Icon: HammerIcon,
     activeTextColour: 'black',
   },
-  { href: '/about', title: 'About', icon: <ManIcon color={'black'} />, activeTextColour: 'white' },
+  { href: '/about', title: 'About', Icon: ManIcon, activeTextColour: 'white' },
   {
     href: 'https://topaz-feather-00e.notion.site/Digital-Garden-8d6f4a7b9de44896a78bf045c3eb6a66',
     title: 'Digital Garden',
-    icon: <LeafIcon color={'black'} />,
+    Icon: LeafIcon,
     activeTextColour: 'white',
   },
 ]

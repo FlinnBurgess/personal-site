@@ -1,3 +1,9 @@
+:global(html.dark) {
+  .navIcon {
+    color: white;
+  }
+}
+
 .navbar {
   display: flex;
   align-items: center;
