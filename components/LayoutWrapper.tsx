@@ -9,12 +9,20 @@ import ThemeSwitch from './ThemeSwitch'
 import { ReactNode, useEffect, useRef, useState } from 'react'
 import styles from './LayoutWrapper.module.scss'
 import { useRouter } from 'next/router'
+import { motion } from 'framer-motion'
 
 interface Props {
   children: ReactNode
+  key: string
 }
 
-const LayoutWrapper = ({ children }: Props) => {
+const pageTransitionVariants = {
+  hidden: { opacity: 0, x: 0, y: 100 },
+  enter: { opacity: 1, x: 0, y: 0 },
+  exit: { opacity: 0, x: 0, y: 100 },
+}
+
+const LayoutWrapper = ({ children, key }: Props) => {
   const headerRef = useRef(null)
   const navbarSquashOffset = 90
   const [headerIsSticky, setHeaderIsSticky] = useState(false)
@@ -78,7 +86,17 @@ const LayoutWrapper = ({ children }: Props) => {
       <SectionContainer>
         <div className="flex h-screen flex-col justify-between">
           <main className={`${styles.pageContent} ${headerIsSticky ? styles.offsetContent : ''}`}>
-            {children}
+            <motion.main
+              variants={pageTransitionVariants}
+              initial={'hidden'}
+              animate={'enter'}
+              exit={'exit'}
+              transition={{ type: 'fade-in-out' }}
+              className={''}
+              key={key}
+            >
+              {children}
+            </motion.main>
           </main>
           <Footer />
         </div>

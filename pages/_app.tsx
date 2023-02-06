@@ -11,17 +11,20 @@ import Head from 'next/head'
 import siteMetadata from '@/data/siteMetadata'
 import Analytics from '@/components/analytics'
 import LayoutWrapper from '@/components/LayoutWrapper'
+import { AnimatePresence } from 'framer-motion'
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
       <Head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
       </Head>
       <Analytics />
-      <LayoutWrapper>
-        <Component {...pageProps} />
-      </LayoutWrapper>
+      <AnimatePresence mode="wait" initial={false}>
+        <LayoutWrapper key={router.asPath}>
+          <Component {...pageProps} />
+        </LayoutWrapper>
+      </AnimatePresence>
     </ThemeProvider>
   )
 }
