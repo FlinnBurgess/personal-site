@@ -17,9 +17,9 @@ interface Props {
 }
 
 const pageTransitionVariants = {
-  hidden: { opacity: 0, x: 0, y: 100 },
+  hidden: { opacity: 0, x: 0, y: 30 },
   enter: { opacity: 1, x: 0, y: 0 },
-  exit: { opacity: 0, x: 0, y: 100 },
+  exit: { opacity: 0, x: 0, y: 30 },
 }
 
 const LayoutWrapper = ({ children, key }: Props) => {
@@ -91,7 +91,7 @@ const LayoutWrapper = ({ children, key }: Props) => {
               initial={'hidden'}
               animate={'enter'}
               exit={'exit'}
-              transition={{ type: 'fade-in-out' }}
+              transition={{ y: { duration: 0.25 } }}
               className={''}
               key={key}
             >
